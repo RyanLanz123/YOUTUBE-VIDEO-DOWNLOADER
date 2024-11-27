@@ -13,10 +13,20 @@ def download_video(url, save_path):
     except Exception as e:
         print(f"An error occurred: {e}")
 
-# Video URL
-url = "https://www.youtube.com/shorts/s-O0oLqfBz4"
-# Save path - Ensure it's a raw string or escape backslashes
-save_path = r"C:\Users\ryanl\OneDrive\Desktop\Py Projects\YOUTUBE-VIDEO-DOWNLOADER"
+def open_file_dialog():
+    folder = filedialog.askdirectory()
+    return folder  # Return the selected folder path
 
-# Call the download function
-download_video(url, save_path)
+if __name__ == "__main__":
+    root = tk.Tk()
+    root.withdraw()
+
+    video_url = input("Please enter a YouTube URL: ")
+    save_dir = open_file_dialog()
+
+    if save_dir:  # Ensure the returned folder path is valid
+        print(f"Selected folder: {save_dir}")
+        print("Started download...")
+        download_video(video_url, save_dir)
+    else:
+        print("Invalid save location")
